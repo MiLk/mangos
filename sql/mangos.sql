@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `db_version`;
 CREATE TABLE `db_version` (
   `version` varchar(120) default NULL,
   `creature_ai_version` varchar(120) default NULL,
-  `required_s9999_7196_02_mangos_spell_bonus_data` bit(1) default NULL
+  `required_s9999_7199_03_mangos_spell_bonus_data` bit(1) default NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED COMMENT='Used DB version notes';
 
 --
@@ -15038,7 +15038,7 @@ INSERT INTO `spell_bonus_data` VALUES
 ('2120', '0.2357', '0.122', '0', 'Mage - Flamestrike'),
 ('11366', '1.15', '0.05', '0', 'Mage - Pyroblast'),
 ('2948', '0.4286', '0', '0', 'Mage - Scorch'),
-('44614', '0.8571', '0', '0', 'Frostfire Bolt'),
+('44614', '0.8571', '0', '0', 'Mage - Frostfire Bolt'),
 ('44457', '0.4', '0.2', '0', 'Mage - Living Bomb'),
 ('42208', '0.0952', '0', '0', 'Mage - Blizzard Triggered Spell Rank 1'),
 ('42209', '0.0952', '0', '0', 'Mage - Blizzard Triggered Spell Rank 2'),
@@ -15097,7 +15097,7 @@ INSERT INTO `spell_bonus_data` VALUES
 ('17', '0.8068', '0', '0', 'Priest - Power Word: Shield'),
 ('596', '0.8086', '0', '0', 'Priest - Prayer of Healing'),
 ('33110', '0.8068', '0', '0', 'Priest - Prayer of Mending Heal Proc'),
-('139', '1.88', '0', '0', 'Priest - Renew'),
+('139', '0', '0.376', '0', 'Priest - Renew'),
 ('2944', '0.1849', '0', '0', 'Priest - Devouring Plague'),
 ('14914', '0.5711', '0.024', '0', 'Priest - Holy Fire'),
 ('15237', '0.1606', '0', '0', 'Priest - Holy Nova Damage'),
@@ -15165,10 +15165,12 @@ INSERT INTO `spell_bonus_data` VALUES
 ('172', '0', '0.3', '0', 'Warlock - Corruption'),
 ('348', '0.2', '0.2', '0', 'Warlock - Immolate'),
 ('27243', '0.22', '0.25', '0', 'Warlock - Seed of Corruption'),
-('18265', '0', '1', '0', 'Warlock - Siphon Life'),
+('18265', '0', '0.1', '0', 'Warlock - Siphon Life'),
 ('30108', '0', '0.24', '0', 'Warlock - Unstable Affliction'),
+('31117', '1.8', '0', '0', 'Warlock - Unstable Affliction Dispell'),
 ('17962', '0.4286', '0', '0', 'Warlock - Conflagrate'),
 ('6789', '0.22', '0', '0', 'Warlock - Death Coil'),
+('28176', '0', '0', '0', 'Warlock - Fel Armor'),
 ('29722', '0.7143', '0', '0', 'Warlock - Incinerate'),
 ('5676', '0.4286', '0', '0', 'Warlock - Searing Pain'),
 ('686', '0.8571', '0', '0', 'Warlock - Shadow Bolt'),
