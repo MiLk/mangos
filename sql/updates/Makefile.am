@@ -240,8 +240,8 @@ pkgdata_DATA = \
 	s0148_10419_01_mangos_spell_chain.sql \
 	s0150_10423_01_mangos_spell_chain.sql \
 	s0150_10427_02_mangos_spell_proc_event.sql \
-	sxxxx_01_mangos_spell_chain.sql \
-	sxxxx_02_mangos_spell_bonus_data.sql
+	s9999_7196_01_mangos_spell_chain.sql \
+	s9999_7196_02_mangos_spell_bonus_data.sql
 
 ## Additional files to include when running 'make dist'
 #  SQL update files, to upgrade database schema from older revisions
@@ -460,5 +460,5 @@ EXTRA_DIST = \
 	s0148_10419_01_mangos_spell_chain.sql \
 	s0150_10423_01_mangos_spell_chain.sql \
 	s0150_10427_02_mangos_spell_proc_event.sql \
-	sxxxx_01_mangos_spell_chain.sql \
-	sxxxx_02_mangos_spell_bonus_data.sql
+	s9999_7196_01_mangos_spell_chain.sql \
+	s9999_7196_02_mangos_spell_bonus_data.sql
