@@ -600,13 +600,8 @@ void World::LoadConfigSettings(bool reload)
         m_timers[WUPDATE_UPTIME].SetInterval(getConfig(CONFIG_UINT32_UPTIME_UPDATE)*MINUTE*IN_MILLISECONDS);
         m_timers[WUPDATE_UPTIME].Reset();
     }
-    
-    setConfig(CONFIG_UINT32_ONLINE_PLAYERS_UPDATE, "UpdateOnlinePlayersInterval", 5);
-    if (reload)
-    {
-        m_timers[WUPDATE_ONLINE_PLAYERS].SetInterval(getConfig(CONFIG_UINT32_ONLINE_PLAYERS_UPDATE)*MINUTE*IN_MILLISECONDS);
-        m_timers[WUPDATE_ONLINE_PLAYERS].Reset();
-    }
+
+    setConfig(CONFIG_BOOL_UPDATE_ONLINE_PLAYERS, "UpdateOnlinePlayers", 0);
 
     setConfig(CONFIG_UINT32_SKILL_CHANCE_ORANGE, "SkillChance.Orange", 100);
     setConfig(CONFIG_UINT32_SKILL_CHANCE_YELLOW, "SkillChance.Yellow", 75);
@@ -1213,7 +1208,6 @@ void World::SetInitialWorldSettings()
     m_timers[WUPDATE_AUCTIONS].SetInterval(MINUTE*IN_MILLISECONDS);
     m_timers[WUPDATE_UPTIME].SetInterval(m_configUint32Values[CONFIG_UINT32_UPTIME_UPDATE]*MINUTE*IN_MILLISECONDS);
                                                             //Update "uptime" table based on configuration entry in minutes.
-    m_timers[WUPDATE_ONLINE_PLAYERS].SetInterval(m_configUint32Values[CONFIG_UINT32_ONLINE_PLAYERS_UPDATE]*MINUTE*IN_MILLISECONDS);
     m_timers[WUPDATE_CORPSES].SetInterval(3*HOUR*IN_MILLISECONDS);
     m_timers[WUPDATE_DELETECHARS].SetInterval(DAY*IN_MILLISECONDS); // check for chars to delete every day
 
@@ -1371,7 +1365,7 @@ void World::Update(uint32 diff)
             }
         }
     }
-    /// <li> Update uptime table
+    /// <li> Update uptime table and online_players table if enabled
     if (m_timers[WUPDATE_UPTIME].Passed())
     {
         uint32 tmpDiff = uint32(m_gameTime - m_startTime);
@@ -1379,13 +1373,9 @@ void World::Update(uint32 diff)
 
         m_timers[WUPDATE_UPTIME].Reset();
         LoginDatabase.PExecute("UPDATE uptime SET uptime = %u, maxplayers = %u WHERE realmid = %u AND starttime = " UI64FMTD, tmpDiff, maxClientsNum, realmID, uint64(m_startTime));
-    }
-    
-    /// <li> Update online_players Table
-    if (m_timers[WUPDATE_ONLINE_PLAYERS].Passed())
-    {
-        m_timers[WUPDATE_ONLINE_PLAYERS].Reset();
-        LoginDatabase.PExecute("INSERT INTO online_players (realm, players) VALUES (%u, %u)", realmID, GetActiveSessionCount());
+
+        if(getConfig(CONFIG_BOOL_UPDATE_ONLINE_PLAYERS))
+            LoginDatabase.PExecute("INSERT INTO online_players (realm, players) VALUES (%u, %u)", realmID, GetActiveSessionCount());
     }
 
     /// <li> Handle all other objects
